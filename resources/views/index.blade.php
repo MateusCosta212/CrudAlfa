@@ -1,7 +1,7 @@
 @extends('layouts.layout') 
 
 @section('content')
-    <h1>Lista de Contatos</h1>
+    <h1>Contact List</h1>
     
     <a href="{{ route('create_contact') }}" class="btn btn-primary mb-3">Register</a>
 

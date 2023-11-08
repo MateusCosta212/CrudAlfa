@@ -9,15 +9,6 @@
     @if ($errors->has('email'))
     <div class="alert alert-danger">{{ $errors->first('email') }}</div>
 @endif
-    @if ($errors->has('contact'))
-        <div class="alert alert-danger">{{ $errors->first('contact') }}</div>
-    @endif
-    @if ($errors->has('name'))
-        <div class="alert alert-danger">{{ $errors->first('name') }}</div>
-    @endif
-    @if ($errors->has('email'))
-    <div class="alert alert-danger">{{ $errors->first('email') }}</div>
-@endif
     <h1>Add Contact</h1>
     <form method="POST" action="{{ route('save_contact') }}">
         @csrf
@@ -42,4 +33,3 @@
 
     </form>
 @endsection
-
