@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Contact;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+
 
 class ContactController extends Controller
 {
@@ -30,20 +32,32 @@ class ContactController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'contact' => 'required',
-            'email' => 'required|email',
+            'name' => ['required', 'string', 'min:6'], // O nome deve ter pelo menos 6 caracteres.
+            'contact' => [
+                'required',
+                'numeric',
+                'digits:9',
+                Rule::unique('contacts')->where(function ($query) use ($request) {
+                    return $query->where('email', $request->email);
+                })
+            ],
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('contacts')->where(function ($query) use ($request) {
+                    return $query->where('contact', $request->contact);
+                })
+            ],
+           
         ]);
-    
+
         $contact = new Contact();
         $contact->name = $request->input('name');
         $contact->contact = $request->input('contact');
         $contact->email = $request->input('email');
         $contact->save();
     
-        $contatos = Contact::all(); 
-
-        return view('index', compact('contatos'))->with('success', 'Contato criado com sucesso!');
+        return redirect()->route('contact_list')->with('success', 'Contato criado com sucesso!');
     }
     
 
@@ -71,8 +85,8 @@ class ContactController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required',
-            'contact' => 'required',
+            'name' => ['required', 'string', 'min:6'],
+            'contact' => ['required', 'numeric', 'digits:9'], 
             'email' => 'required|email',
         ]);
     
@@ -82,8 +96,7 @@ class ContactController extends Controller
         $contact->email = $request->input('email');
         $contact->save();
 
-        $contatos = Contact::all(); 
-        return view('index', compact('contatos'))->with('success', 'Contato atualizado com sucesso!');
+        return redirect()->route('contact_list')->with('success', 'Contato atualizado com sucesso!');
     }
 
     /**
@@ -93,8 +106,6 @@ class ContactController extends Controller
     {
         $contato = Contact::findOrFail($id);
         $contato->delete();
-
-        $contatos = Contact::all(); 
-        return view('index', compact('contatos'))->with('success', 'Contato excluído com sucesso!');
+        return redirect()->route('contact_list')->with('success', 'Contato excluido com sucesso!');
     }
 }

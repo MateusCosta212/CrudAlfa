@@ -3,7 +3,7 @@
 @section('content')
     <h1>Lista de Contatos</h1>
     
-    <a href="{{ route('create_contact') }}" class="btn btn-primary mb-3">Cadastrar</a>
+    <a href="{{ route('create_contact') }}" class="btn btn-primary mb-3">Register</a>
 
     <table class="table">
         <thead>

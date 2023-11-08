@@ -23,6 +23,8 @@ Route::post('/contact/save', [ContactController::class, 'store'])->name('save_co
 Route::get('/contact/edit/{id}', [ContactController::class, 'edit'])->name('edit_contact');
 Route::put('/contact/update/{id}', [ContactController::class, 'update'])->name('update_contact');
 Route::delete('/contact/delete/{id}', [ContactController::class, 'destroy'])->name('delete_contact');
+Route::get('/index', [ContactController::class, 'index'])->name('contact_list');
+
 
 
 
