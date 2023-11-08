@@ -16,7 +16,6 @@
             </tr>
         </thead>
         <tbody>
-            <!-- Loop pelos dados do contato e exibição na tabela -->
             @foreach($contatos as $contato)
                 <tr>
                     <td>{{ $contato->id }}</td>
@@ -24,8 +23,7 @@
                     <td>{{ $contato->contact }}</td>
                     <td>{{ $contato->email }}</td>
                     <td>
-                        <!-- Botões de ação, como editar ou excluir -->
-                        
+                        <a href="{{ route('edit_contact', $contato->id) }}" class="btn btn-sm btn-info">Editar</a>
                     </td>
                 </tr>
             @endforeach

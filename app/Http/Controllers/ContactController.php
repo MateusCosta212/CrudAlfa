@@ -41,7 +41,7 @@ class ContactController extends Controller
         $contact->email = $request->input('email');
         $contact->save();
     
-        $contatos = Contact::all(); // Recupere a lista atualizada de contatos
+        $contatos = Contact::all(); 
 
         return view('index', compact('contatos'))->with('success', 'Contato criado com sucesso!');
     }
@@ -58,17 +58,32 @@ class ContactController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Contact $contact)
+    public function edit($id)
     {
-        //
+        $contato = Contact::find($id); 
+    
+        return view('edit.edit', compact('contato'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Contact $contact)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'contact' => 'required',
+            'email' => 'required|email',
+        ]);
+    
+        $contact = Contact::find($id);
+        $contact->name = $request->input('name');
+        $contact->contact = $request->input('contact');
+        $contact->email = $request->input('email');
+        $contact->save();
+
+        $contatos = Contact::all(); 
+        return view('index', compact('contatos'))->with('success', 'Contato atualizado com sucesso!');
     }
 
     /**

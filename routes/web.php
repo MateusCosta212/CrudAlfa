@@ -20,5 +20,11 @@ Route::get('/', [ContactController::class, 'index'])->name('home');
 Route::resource('contacts', 'ContactController');
 Route::get('/contact/register', [ContactController::class, 'create'])->name('create_contact');
 Route::post('/contact/save', [ContactController::class, 'store'])->name('save_contact');
+Route::get('/contact/edit/{id}', [ContactController::class, 'edit'])->name('edit_contact');
+Route::put('/contact/update/{id}', [ContactController::class, 'update'])->name('update_contact');
+
+Route::get('/contact/edit/{id}', [ContactController::class, 'edit'])->name('edit_contact');
+Route::put('/contact/update/{id}', [ContactController::class, 'update'])->name('update_contact');
+
 
 
