@@ -31,24 +31,24 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
-            'name' => ['required', 'string', 'min:6'], // O nome deve ter pelo menos 6 caracteres.
+            'name' => ['required', 'string', 'min:6'],
             'contact' => [
                 'required',
                 'numeric',
                 'digits:9',
-                Rule::unique('contacts')->where(function ($query) use ($request) {
-                    return $query->where('email', $request->email);
+                Rule::unique('contacts', 'contact')->where(function ($query) use ($request) {
+                    return $query->where('email', '<>', $request->email);
                 })
             ],
             'email' => [
                 'required',
                 'email',
-                Rule::unique('contacts')->where(function ($query) use ($request) {
-                    return $query->where('contact', $request->contact);
+                Rule::unique('contacts', 'email')->where(function ($query) use ($request) {
+                    return $query->where('contact', '<>', $request->contact);
                 })
             ],
-
         ]);
 
         $contact = new Contact();
@@ -87,8 +87,21 @@ class ContactController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'min:6'],
-            'contact' => ['required', 'numeric', 'digits:9'],
-            'email' => 'required|email',
+            'contact' => [
+                'required',
+                'numeric',
+                'digits:9',
+                Rule::unique('contacts', 'contact')->where(function ($query) use ($request) {
+                    return $query->where('email', '<>', $request->email);
+                })
+            ],
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('contacts', 'email')->where(function ($query) use ($request) {
+                    return $query->where('contact', '<>', $request->contact);
+                })
+            ],
         ]);
 
         $contact = Contact::find($id);
