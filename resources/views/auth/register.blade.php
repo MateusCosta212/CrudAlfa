@@ -49,4 +49,7 @@
             </x-primary-button>
         </div>
     </form>
+      <x-danger-button class="ml-3">
+                <a href="{{ route('contact_list') }}">Back</a>
+            </x-danger-button>
 </x-guest-layout>
