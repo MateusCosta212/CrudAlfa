@@ -1,6 +1,11 @@
 @extends('layouts.layout') 
 
 @section('content')
+@if (session('success'))
+<div class="alert alert-success">
+    {{ session('success') }}
+</div>
+@endif
     <h1>Contact List</h1>
     
     <a href="{{ route('create_contact') }}" class="btn btn-primary mb-3">Register</a>
@@ -9,10 +14,10 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Nome</th>
-                <th>Contato</th>
+                <th>Name</th>
+                <th>Contact</th>
                 <th>Email</th>
-                <th>Ações</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>

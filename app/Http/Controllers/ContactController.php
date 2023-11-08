@@ -14,7 +14,7 @@ class ContactController extends Controller
      */
     public function index()
     {
-        $contatos = Contact::all(); 
+        $contatos = Contact::all();
         return view('index', compact('contatos'));
     }
 
@@ -48,7 +48,7 @@ class ContactController extends Controller
                     return $query->where('contact', $request->contact);
                 })
             ],
-           
+
         ]);
 
         $contact = new Contact();
@@ -56,10 +56,11 @@ class ContactController extends Controller
         $contact->contact = $request->input('contact');
         $contact->email = $request->input('email');
         $contact->save();
-    
-        return redirect()->route('contact_list')->with('success', 'Contato criado com sucesso!');
+
+        return redirect()->route('contact_list')->with('success', '
+        Contact created successfully!');
     }
-    
+
 
     /**
      * Display the specified resource.
@@ -74,8 +75,8 @@ class ContactController extends Controller
      */
     public function edit($id)
     {
-        $contato = Contact::find($id); 
-    
+        $contato = Contact::find($id);
+
         return view('edit.edit', compact('contato'));
     }
 
@@ -86,17 +87,17 @@ class ContactController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'min:6'],
-            'contact' => ['required', 'numeric', 'digits:9'], 
+            'contact' => ['required', 'numeric', 'digits:9'],
             'email' => 'required|email',
         ]);
-    
+
         $contact = Contact::find($id);
         $contact->name = $request->input('name');
         $contact->contact = $request->input('contact');
         $contact->email = $request->input('email');
         $contact->save();
 
-        return redirect()->route('contact_list')->with('success', 'Contato atualizado com sucesso!');
+        return redirect()->route('contact_list')->with('success', 'Contact updated successfully!');
     }
 
     /**
@@ -106,6 +107,6 @@ class ContactController extends Controller
     {
         $contato = Contact::findOrFail($id);
         $contato->delete();
-        return redirect()->route('contact_list')->with('success', 'Contato excluido com sucesso!');
+        return redirect()->route('contact_list')->with('success', 'Contact deleted successfully!');
     }
 }
