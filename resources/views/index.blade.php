@@ -9,7 +9,9 @@
     <div class="container">
         <div class="text-center">
             <h1 align="center">Contact List</h1>
+            @auth
             <a href="{{ route('create_contact') }}" class="btn btn-success mb-3 mx-auto">Register</a>
+            @endauth
         </div>
         <table class="table table-bordered">
             <thead>
@@ -18,7 +20,9 @@
                     <th>Name</th>
                     <th>Contact</th>
                     <th>Email</th>
+                    @auth
                     <th>Action</th>
+                    @endauth
                 </tr>
             </thead>
             <tbody>
@@ -28,6 +32,7 @@
                         <td>{{ $contato->name }}</td>
                         <td>{{ $contato->contact }}</td>
                         <td>{{ $contato->email }}</td>
+                        @auth
                         <td class="d-flex">
                             <a href="{{ route('edit_contact', $contato->id) }}" class="btn btn-sm btn-info">
                                 <i class="fas fa-edit"></i>
@@ -37,6 +42,7 @@
                                 <i class="fas fa-trash-alt"></i>
                             </button>
                         </td>
+                        @endauth
                     </tr>
                 @endforeach
             </tbody>

@@ -44,6 +44,31 @@
             <ul class="navbar-nav">
             </ul>
         </div>
+        <ul class="navbar-nav ml-auto">
+            @guest
+            <!-- Exibir quando o usuário não estiver logado -->
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('register') }}">
+                    <i class="fas fa-user-plus"></i> Registro 
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('login') }}">
+                    <i class="fas fa-sign-in-alt"></i> Login 
+                </a>
+            </li>
+            @else
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('logout') }}"
+                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            </li>
+            @endguest
+        </ul>
     </nav>
     @yield('content')
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
