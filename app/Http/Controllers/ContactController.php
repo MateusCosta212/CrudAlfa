@@ -89,8 +89,12 @@ class ContactController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Contact $contact)
+    public function destroy($id)
     {
-        //
+        $contato = Contact::findOrFail($id);
+        $contato->delete();
+
+        $contatos = Contact::all(); 
+        return view('index', compact('contatos'))->with('success', 'Contato excluído com sucesso!');
     }
 }

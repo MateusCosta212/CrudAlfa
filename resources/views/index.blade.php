@@ -24,6 +24,12 @@
                     <td>{{ $contato->email }}</td>
                     <td>
                         <a href="{{ route('edit_contact', $contato->id) }}" class="btn btn-sm btn-info">Editar</a>
+                        <form method="POST" action="{{ route('delete_contact', $contato->id) }}">
+                            @csrf
+                            @method('DELETE')
+                        
+                            <button type="submit" class="btn btn-sm btn-danger">Excluir</button>
+                        </form>
                     </td>
                 </tr>
             @endforeach
