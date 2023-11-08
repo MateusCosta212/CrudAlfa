@@ -49,7 +49,7 @@
             <!-- Exibir quando o usuário não estiver logado -->
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('register') }}">
-                    <i class="fas fa-user-plus"></i> Registro 
+                    <i class="fas fa-user-plus"></i> Register 
                 </a>
             </li>
             <li class="nav-item">
